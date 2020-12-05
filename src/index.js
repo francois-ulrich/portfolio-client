@@ -1,17 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Okta
+import { Security, ImplicitCallback } from '@okta/okta-react';
+
 // Apollo
 import { ApolloProvider } from 'react-apollo';
-import apolloClient from './apolloClient';
+import apolloClient from './apollo/apolloClient';
 
 ReactDOM.render(
-  <ApolloProvider client={apolloClient}>
-    <App />
-  </ApolloProvider>,
+  <BrowserRouter>
+    <Security
+      issuer={`${process.env.REACT_APP_OKTA_ORG_URL}/oauth2/default`}
+      redirect_uri={`${window.location.origin}/implicit/callback`}
+      client_id={process.env.REACT_APP_OKTA_CLIENT_ID}
+    >
+      <ApolloProvider client={apolloClient}>
+        <Route path="/implicit/callback" component={ImplicitCallback} />
+        <Route path="/" component={App} />
+      </ApolloProvider>,
+    </Security>
+  </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 

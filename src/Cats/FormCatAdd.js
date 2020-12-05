@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 // Apollo
-import apolloClient from './apolloClient';
+import apolloClient from '../apollo/apolloClient';
 
 // App
-import {GET_CATS} from './apollo/queries';
-import {SUBMIT_CAT} from './apollo/mutations';
+import {GET_CATS} from '../apollo/queries';
+import {SUBMIT_CAT} from '../apollo/mutations';
 
 export class FormCatAdd extends Component {
     state = {

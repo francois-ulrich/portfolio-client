@@ -2,7 +2,9 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { Table } from 'reactstrap';
 
-import {GET_CATS} from './apollo/queries';
+import {GET_CATS} from '../apollo/queries';
+
+
 
 const CatsViewer = () => (
   <Query query={GET_CATS}>
